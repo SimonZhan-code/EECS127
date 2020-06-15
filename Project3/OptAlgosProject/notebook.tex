@@ -1,0 +1,1131 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{OptimizationAlgorithmsProject}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{colors} \PY{k}{import} \PY{n}{LogNorm}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{animation}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{optimize} \PY{k}{import} \PY{n}{minimize}\PY{p}{,} \PY{n}{OptimizeResult}
+        
+        \PY{k+kn}{from} \PY{n+nn}{answer} \PY{k}{import} \PY{n}{Answer}
+\end{Verbatim}
+
+
+    \subsection{\texorpdfstring{{Implementation (Students
+do)}}{Implementation (Students do)}}\label{implementation-students-do}
+
+\subsubsection{Methods}\label{methods}
+
+You will implement four optimization algorithms (descriptions available
+\href{https://ruder.io/optimizing-gradient-descent/index.html}{here}).
+For algorithms that keep a moving average (all but gradient descent),
+you should initialize the averaging variables to zeros. Keep in mind
+that we will be trying to use these algorithms to minimize, not
+maximize, an objective. - Gradient descent (\texttt{gd}) - Momentum
+gradient method (\texttt{momentum}) - Nesterov's accelerated gradient
+method (\texttt{nag}) - Adaptive gradient method (\texttt{adagrad})
+
+Make note of the function headers:
+\texttt{def\ gd(func,\ x,\ lr,\ num\_iters,\ jac,\ tol,\ callback,\ *args,\ **kwargs):}.
+Each method will satisfy this header format in accordance with the
+specification of custom minimizers used with
+\texttt{scipy.optimize.minimize}. This function is
+\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html}{well-documented},
+but the highlights of the arguments are below. - \texttt{func}: {[}type:
+function{]} The loss function. Takes in a point of type np.ndarray (2,)
+and returns a float representing the value of the function at that
+point. - \texttt{x}: {[}type: np.ndarray (2,){]} The starting point of
+the optimization. - \texttt{lr}: {[}type: function{]} Learning rate
+schedule. Takes in an argument of type int representing the iteration
+number, and returns the learning rate to be used for that iteration. -
+\texttt{num\_iters}: {[}type: int{]} The number of iterations of the
+optimization method to run. - \texttt{jac}: {[}type: function{]} The
+gradient of the loss function. "jac" stands for Jacobian, which is out
+of scope for this class, but for scalar-valued functions, it is the
+transpose of the gradient. Takes in a point of type np.ndarray (2,) and
+returns an np.ndarray (2,) representing the gradient of the function at
+that point. - \texttt{tol}: {[}type: float{]} The tolerance (with
+respect to the iterate) within which the optimization method is deemed
+to have converged. - \texttt{callback}: {[}type: function{]} A function
+to be called on each iterate over the course of the optimization. -
+\texttt{*args} and \texttt{**kwargs}: You will not need to use these,
+but they are present for compatibility with the
+\texttt{scipy.optimize.minimize} API.
+
+Each function will need to return a two-tuple containing - An instance
+of \texttt{scipy.optimize.OptimizeResult}, described
+\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html}{here}.
+- A \texttt{np.ndarray} containing the function value at the initial
+point and each iterate over the course of the optimization.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} demonstration of scipy.optimize.minimize and the usage of the callback argument}
+        \PY{n}{minimize}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{(}\PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{jac}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Newton\PYZhy{}CG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{callback}\PY{o}{=}\PY{n+nb}{print}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.]
+[0.]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}      fun: array([0.])
+             jac: array([0.])
+         message: 'Optimization terminated successfully.'
+            nfev: 3
+            nhev: 0
+             nit: 2
+            njev: 6
+          status: 0
+         success: True
+               x: array([0.])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{gd}\PY{p}{(}\PY{n}{func}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{lr}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{p}{,} \PY{n}{jac}\PY{p}{,} \PY{n}{tol}\PY{p}{,} \PY{n}{callback}\PY{p}{,} \PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+            \PY{n}{losses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{x\PYZus{}per} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{n}{bol} \PY{o}{=} \PY{k+kc}{False}
+            \PY{k}{for} \PY{n}{itr} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iters}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} TODO implement:}
+                \PY{c+c1}{\PYZsh{}   \PYZhy{} gradient descent update for x}
+                \PY{c+c1}{\PYZsh{}   \PYZhy{} call `callback` on each iterate of x (excluding the initial value)}
+                \PY{c+c1}{\PYZsh{}   \PYZhy{} add function values to the `losses` list}
+                \PY{c+c1}{\PYZsh{}   \PYZhy{} stop the algorithm after `num\PYZus{}iters` iterations or if the iterates converge}
+                \PY{c+c1}{\PYZsh{}     within a tolerance of `tol`. `np.linalg.norm` may be useful for this part.}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x\PYZus{}per}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{tol}\PY{p}{:}
+                    \PY{n}{bol} \PY{o}{=} \PY{k+kc}{True}
+                    \PY{k}{break}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{x\PYZus{}per} \PY{o}{=} \PY{n}{x}
+                    \PY{n}{x} \PY{o}{=} \PY{n}{x\PYZus{}per} \PY{o}{\PYZhy{}} \PY{n}{lr}\PY{p}{(}\PY{n}{itr}\PY{p}{)} \PY{o}{*} \PY{n}{jac}\PY{p}{(}\PY{n}{x\PYZus{}per}\PY{p}{)}
+                    \PY{n}{callback}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                    \PY{n}{losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} TODO return an OptimizeResult object (documentation linked above) and a numpy array of the losses above}
+            \PY{k}{return} \PY{n}{OptimizeResult}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{p}{,}\PY{n}{success} \PY{o}{=} \PY{n}{bol}\PY{p}{,}\PY{n}{status} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}\PY{n}{nit} \PY{o}{=} \PY{n}{itr}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{losses}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{momentum}\PY{p}{(}\PY{n}{func}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{lr}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{p}{,} \PY{n}{jac}\PY{p}{,} \PY{n}{tol}\PY{p}{,} \PY{n}{callback}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} TODO implement}
+            \PY{n}{losses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{x\PYZus{}per} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{velocity} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{bol} \PY{o}{=} \PY{k+kc}{False}
+            \PY{n}{losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{itr} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iters}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x\PYZus{}per}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{tol}\PY{p}{:}
+                    \PY{n}{bol} \PY{o}{=} \PY{k+kc}{True}
+                    \PY{k}{break}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{x\PYZus{}per} \PY{o}{=} \PY{n}{x}
+                    \PY{n}{velocity} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{alpha}\PY{o}{*}\PY{n}{velocity} \PY{o}{+} \PY{n}{lr}\PY{p}{(}\PY{n}{itr}\PY{p}{)}\PY{o}{*}\PY{n}{jac}\PY{p}{(}\PY{n}{x\PYZus{}per}\PY{p}{)}
+                    \PY{n}{x} \PY{o}{=} \PY{n}{x\PYZus{}per} \PY{o}{\PYZhy{}} \PY{n}{velocity}
+                    \PY{n}{callback}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                    \PY{n}{losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{OptimizeResult}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{p}{,}\PY{n}{success} \PY{o}{=} \PY{n}{bol}\PY{p}{,}\PY{n}{status} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{nit} \PY{o}{=} \PY{n}{itr}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{losses}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{nag}\PY{p}{(}\PY{n}{func}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{lr}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{p}{,} \PY{n}{jac}\PY{p}{,} \PY{n}{tol}\PY{p}{,} \PY{n}{callback}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} TODO implement}
+            \PY{n}{losses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{x\PYZus{}per} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{velocity} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{bol} \PY{o}{=} \PY{k+kc}{False}
+            \PY{n}{losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{itr} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iters}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x\PYZus{}per}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{tol}\PY{p}{:}
+                    \PY{n}{bol} \PY{o}{=} \PY{k+kc}{True}
+                    \PY{k}{break}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{x\PYZus{}per} \PY{o}{=} \PY{n}{x}
+                    \PY{n}{velocity} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{alpha}\PY{o}{*}\PY{n}{velocity} \PY{o}{+} \PY{n}{lr}\PY{p}{(}\PY{n}{itr}\PY{p}{)}\PY{o}{*}\PY{n}{jac}\PY{p}{(}\PY{n}{x\PYZus{}per} \PY{o}{+} \PY{n}{alpha}\PY{o}{*}\PY{n}{velocity}\PY{p}{)}
+                    \PY{n}{x} \PY{o}{=} \PY{n}{x\PYZus{}per} \PY{o}{\PYZhy{}} \PY{n}{velocity}
+                    \PY{n}{callback}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                    \PY{n}{losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{OptimizeResult}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{p}{,}\PY{n}{success} \PY{o}{=} \PY{n}{bol}\PY{p}{,}\PY{n}{status} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{nit} \PY{o}{=} \PY{n}{itr}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{losses}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{adagrad}\PY{p}{(}\PY{n}{func}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{lr}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{p}{,} \PY{n}{jac}\PY{p}{,} \PY{n}{tol}\PY{p}{,} \PY{n}{callback}\PY{p}{,} \PY{n}{eps}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}5}\PY{p}{,} \PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} TODO implement}
+            \PY{n}{losses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{x\PYZus{}per} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{sumval} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{bol} \PY{o}{=} \PY{k+kc}{False}
+            \PY{n}{losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{itr} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iters}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x\PYZus{}per}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{tol}\PY{p}{:}
+                    \PY{n}{bol} \PY{o}{=} \PY{k+kc}{True}
+                    \PY{k}{break}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{x\PYZus{}per} \PY{o}{=} \PY{n}{x}
+                    \PY{n}{sumval} \PY{o}{+}\PY{o}{=} \PY{n}{jac}\PY{p}{(}\PY{n}{x\PYZus{}per}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                    \PY{n}{x} \PY{o}{=} \PY{n}{x\PYZus{}per} \PY{o}{\PYZhy{}} \PY{n}{lr}\PY{p}{(}\PY{n}{itr}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{sumval} \PY{o}{+} \PY{n}{eps}\PY{p}{)}\PY{o}{*}\PY{n}{jac}\PY{p}{(}\PY{n}{x\PYZus{}per}\PY{p}{)}
+                    \PY{n}{callback}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                    \PY{n}{losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{OptimizeResult}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{p}{,}\PY{n}{success} \PY{o}{=} \PY{n}{bol}\PY{p}{,}\PY{n}{status} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{nit} \PY{o}{=} \PY{n}{itr}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{losses}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Functions and gradients}\label{functions-and-gradients}
+
+Below you have been given the implementation of four functions
+(\(\mathbb{R}^2\to\mathbb{R}\)). You will need to implement
+\texttt{grad}, which returns their gradients as \texttt{np.ndarray}
+(2,). There is a field below for you to submit the gradient in
+\(\LaTeX\). - Booth function:
+\(f_1(x)=\left(x_1+2x_2-7\right)^2+\left(2x_1+x_2-5\right)^2\) - Beale
+function:
+\(f_2(x)=\left(1.5-x_1+x_1 x_2\right)^2+\left(2.25-x_1+x_1x_2^2\right)^2+\left(2.625-x_1+x_1 x_2^3\right)^2\)
+- Rosenbrock function:
+\(f_3(x)=100\cdot\left(x_2-x_1^2\right)^2+\left(x_1-1\right)^2\) -
+Ackley function:
+\(f_4(x)=-20\cdot\exp\left(-\frac{1}{5}\sqrt{\frac{x_1^2+x_2^2}{2}}\right)-\exp\left(\frac{\cos 2\pi x_1 + \cos 2\pi x_2}{2}\right)+20+\exp(1)\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:}  \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{fn}\PY{p}{,} \PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{fn} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{booth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{k}{return} \PY{p}{(}\PY{n}{x1} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{7}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x1} \PY{o}{+} \PY{n}{x2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{5}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+            \PY{k}{elif} \PY{n}{fn} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beale}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{k}{return} \PY{p}{(}\PY{l+m+mf}{1.5} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{2.25} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{2.625} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+            \PY{k}{elif} \PY{n}{fn} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rosen2d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{100} \PY{o}{*} \PY{p}{(}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{n}{x1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{x1} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+            \PY{k}{elif} \PY{n}{fn} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ackley2d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{20} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{n}{x1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x1}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{20} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{e}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Function }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ not supported.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{fn}\PY{p}{)}
+                
+        \PY{k}{def} \PY{n+nf}{grad}\PY{p}{(}\PY{n}{fn}\PY{p}{,} \PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} TODO for each function, place the two elements of the gradient in g1 and g2 respectively}
+            \PY{k}{if} \PY{n}{fn} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{booth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{n}{g1} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{x1} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{l+m+mf}{7.0}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x1} \PY{o}{+} \PY{n}{x2} \PY{o}{\PYZhy{}} \PY{l+m+mf}{5.0}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{2}
+                \PY{n}{g2} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{x1} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{l+m+mf}{7.0}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x1} \PY{o}{+} \PY{n}{x2} \PY{o}{\PYZhy{}} \PY{l+m+mf}{5.0}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{fn} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beale}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{n}{g1} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{x2}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{1.5} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{2.25} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{2.625} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}
+                \PY{n}{g2} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x1}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{1.5} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{2.25} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{2.625} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{n}{x1}\PY{o}{*}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{fn} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rosen2d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{n}{g1} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{n}{x1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{x1} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n}{g2} \PY{o}{=} \PY{l+m+mi}{200}\PY{o}{*}\PY{p}{(}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{n}{x1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{fn} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ackley2d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{n}{g1} \PY{o}{=} \PY{l+m+mi}{4}\PY{o}{*}\PY{n}{x1}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{x1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{n}{x1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x1}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x1}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+                \PY{n}{g2} \PY{o}{=} \PY{l+m+mi}{4}\PY{o}{*}\PY{n}{x2}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{x1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{n}{x1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x2}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x1}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{raise} \PY{n+ne}{ValueError}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Function }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ not supported.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{fn}\PY{p}{)}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{(}\PY{n}{g1}\PY{p}{,} \PY{n}{g2}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{\texorpdfstring{{Submission: Gradient values
+\(\LaTeX\)}}{Submission: Gradient values \textbackslash{}LaTeX}}\label{submission-gradient-values-latex}
+
+Enter the gradients you calculated below.
+
+Booth: \(\nabla_x f_1(x)=\text{$\left[\begin{array}{l}
+2\left(x_{1}+2 x_{2}-7\right)+4\left(2 x_{1}+x_{2}-5\right) \\
+4\left(x_{1}+2 x_{2}-7\right)+2\left(2 x_{1}+x_{2}-5\right)
+\end{array}\right]$}\)
+
+\begin{verbatim}
+\
+\end{verbatim}
+
+Beale:
+\(\nabla_x f_2(x)=\text{$\left[\begin{array}{c}2\left(-1+x_{2}\right)\left(1.5-x_{1}+x_{1} x_{2}\right)+2\left(-1+x_{2}^{2}\right)\left(2.25-x_{1}+x_{1} x_{2}^{2}\right)+  2\left(-1+x_{2}^{3}\right)\left(2.625-x_{1}+x_{1} x_{2}^{3}\right) \\ 2 x_{1}\left(1.5-x_{1}+x_{1} x_{2}\right)+4 x_{1} x_{2}\left(2.25-x_{1}+x_{1} x_{2}^{2}\right)+6 x_{1} x_{2}^{2}\left(2.625-x_{1}+x_{1} x_{2}^{3}\right)\end{array}\right]$}\)
+
+\begin{verbatim}
+\
+\end{verbatim}
+
+Rosenbrock:
+\(\nabla_x f_3(x)=\text{$\left[\begin{array}{c}-400 x_{1}\left(x_{2}-x_{1}^{2}\right)+2\left(x_{1}-1\right) \\ 200\left(x_{2}-x_{1}^{2}\right)\end{array}\right]$}\)
+
+\begin{verbatim}
+\
+\end{verbatim}
+
+Ackley:
+\(\nabla_x f_4(x)=\text{$\left[\begin{array}{l}\frac{4 x_{1}}{\sqrt{2\left(x_{1}^{2}+x_{2}^{2}\right)}} \exp \left(-\frac{1}{5} \sqrt{\frac{x_{1}^{2}+x_{2}^{2}}{2}}\right)+\pi \sin 2 \pi x_{1} \exp \left(\frac{\cos 2 \pi x_{1}+\cos 2 \pi x_{2}}{2}\right) \\ \frac{4 x_{2}}{\sqrt{2\left(x_{1}^{2}+x_{2}^{2}\right)}} \exp \left(-\frac{1}{5} \sqrt{\frac{x_{1}^{2}+x_{2}^{2}}{2}}\right)+\pi \sin 2 \pi x_{2} \exp \left(\frac{\cos 2 \pi x_{1}+\cos 2 \pi x_{2}}{2}\right)\end{array}\right]$}\)
+
+    \subsection{Testing your code}\label{testing-your-code}
+
+We are not providing much structure here, but now is a good time to make
+sure your optimization methods are working well. The cell below tests
+your gradient descent method on the function \(f(x)=x^2\). We have
+included the output of our solution as a comment. Note that the function
+you feed it needs to take in a point as its sole argument and return the
+function as well as the gradient evaluated at that point.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Maybe a useful starting example for testing gradient descent on a simple function}
+        \PY{n}{x\PYZus{}squared} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}\PY{p}{)}  \PY{c+c1}{\PYZsh{} returns both the function value and the gradient.}
+        \PY{n}{opt\PYZus{}res}\PY{p}{,} \PY{n}{losses} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{x\PYZus{}squared}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{jac}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{n}{gd}\PY{p}{,} \PY{n}{callback}\PY{o}{=}\PY{n+nb}{print}\PY{p}{,}
+                                   \PY{n}{options}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final iterate: }\PY{l+s+si}{\PYZpc{}.6f}\PY{l+s+s1}{. Number of iterations: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{. Final loss: }\PY{l+s+si}{\PYZpc{}.8f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{opt\PYZus{}res}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{opt\PYZus{}res}\PY{o}{.}\PY{n}{nit}\PY{p}{,} \PY{n}{losses}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Expected output (GD):}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} 1.5}
+        \PY{c+c1}{\PYZsh{} 0.75}
+        \PY{c+c1}{\PYZsh{} 0.375}
+        \PY{c+c1}{\PYZsh{} 0.1875}
+        \PY{c+c1}{\PYZsh{} 0.09375}
+        \PY{c+c1}{\PYZsh{} 0.046875}
+        \PY{c+c1}{\PYZsh{} 0.0234375}
+        \PY{c+c1}{\PYZsh{} 0.01171875}
+        \PY{c+c1}{\PYZsh{} 0.005859375}
+        \PY{c+c1}{\PYZsh{} 0.0029296875}
+        \PY{c+c1}{\PYZsh{} 0.00146484375}
+        \PY{c+c1}{\PYZsh{} 0.000732421875}
+        \PY{c+c1}{\PYZsh{} Final iterate: 0.000732. Number of iterations: 12. Final loss: 0.00000054.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.5
+0.75
+0.375
+0.1875
+0.09375
+0.046875
+0.0234375
+0.01171875
+0.005859375
+0.0029296875
+0.00146484375
+0.000732421875
+Final iterate: 0.000732. Number of iterations: 12. Final loss: 0.00000054.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{x\PYZus{}squared} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}\PY{p}{)}  \PY{c+c1}{\PYZsh{} returns both the function value and the gradient.}
+        \PY{n}{opt\PYZus{}res}\PY{p}{,} \PY{n}{losses} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{x\PYZus{}squared}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{jac}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{n}{momentum}\PY{p}{,} \PY{n}{callback}\PY{o}{=}\PY{n+nb}{print}\PY{p}{,}
+                                   \PY{n}{options}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{0.12}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final iterate: }\PY{l+s+si}{\PYZpc{}.6f}\PY{l+s+s1}{. Number of iterations: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{. Final loss: }\PY{l+s+si}{\PYZpc{}.8f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{opt\PYZus{}res}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{opt\PYZus{}res}\PY{o}{.}\PY{n}{nit}\PY{p}{,} \PY{n}{losses}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Expected output (Momentum):}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} 2.2800000000000002}
+        \PY{c+c1}{\PYZsh{} 2.3808000000000002}
+        \PY{c+c1}{\PYZsh{} 1.7186880000000002}
+        \PY{c+c1}{\PYZsh{} 1.9021036800000002}
+        \PY{c+c1}{\PYZsh{} 1.2805246848}
+        \PY{c+c1}{\PYZsh{} 1.532619856128}
+        \PY{c+c1}{\PYZsh{} 0.93790543646208}
+        \PY{c+c1}{\PYZsh{} 1.248051109410509}
+        \PY{c+c1}{\PYZsh{} 0.6693877374984007}
+        \PY{c+c1}{\PYZsh{} 1.029531715219682}
+        \PY{c+c1}{\PYZsh{} 0.4583145236178052}
+        \PY{c+c1}{\PYZsh{} 0.8624145103912211}
+        \PY{c+c1}{\PYZsh{} 0.29174503980125377}
+        \PY{c+c1}{\PYZsh{} 0.7353287537799235}
+        \PY{c+c1}{\PYZsh{} 0.15962451029193914}
+        \PY{c+c1}{\PYZsh{} Final iterate: 0.159625. Number of iterations: 15. Final loss: 0.02547998.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2.2800000000000002
+2.3808000000000002
+1.7186880000000002
+1.9021036800000002
+1.2805246848
+1.532619856128
+0.93790543646208
+1.248051109410509
+0.6693877374984007
+1.029531715219682
+0.4583145236178052
+0.8624145103912211
+0.29174503980125377
+0.7353287537799235
+0.15962451029193914
+Final iterate: 0.159625. Number of iterations: 14. Final loss: 0.02547998.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{x\PYZus{}squared} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}\PY{p}{)}  \PY{c+c1}{\PYZsh{} returns both the function value and the gradient.}
+        \PY{n}{opt\PYZus{}res}\PY{p}{,} \PY{n}{losses} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{x\PYZus{}squared}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{jac}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{n}{nag}\PY{p}{,} \PY{n}{callback}\PY{o}{=}\PY{n+nb}{print}\PY{p}{,}
+                                   \PY{n}{options}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final iterate: }\PY{l+s+si}{\PYZpc{}.6f}\PY{l+s+s1}{. Number of iterations: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{. Final loss: }\PY{l+s+si}{\PYZpc{}.8f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{opt\PYZus{}res}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{opt\PYZus{}res}\PY{o}{.}\PY{n}{nit}\PY{p}{,} \PY{n}{losses}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Expected output (NAG):}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} 0.5999999999999996}
+        \PY{c+c1}{\PYZsh{} 0.552}
+        \PY{c+c1}{\PYZsh{} 0.11903999999999987}
+        \PY{c+c1}{\PYZsh{} 0.10174079999999996}
+        \PY{c+c1}{\PYZsh{} 0.023462015999999974}
+        \PY{c+c1}{\PYZsh{} 0.01878258431999999}
+        \PY{c+c1}{\PYZsh{} 0.004598814566399996}
+        \PY{c+c1}{\PYZsh{} 0.0034728414689279997}
+        \PY{c+c1}{\PYZsh{} 0.0008972434513305587}
+        \PY{c+c1}{\PYZsh{} 0.0006430563334336508}
+        \PY{c+c1}{\PYZsh{} Final iterate: 0.000643. Number of iterations: 10. Final loss: 0.00000041.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.5999999999999996
+0.552
+0.11903999999999987
+0.10174079999999996
+0.023462015999999974
+0.01878258431999999
+0.004598814566399996
+0.0034728414689279997
+0.0008972434513305587
+0.0006430563334336508
+Final iterate: 0.000643. Number of iterations: 10. Final loss: 0.00000041.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{x\PYZus{}squared} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}\PY{p}{)}  \PY{c+c1}{\PYZsh{} returns both the function value and the gradient.}
+        \PY{n}{opt\PYZus{}res}\PY{p}{,} \PY{n}{losses} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{x\PYZus{}squared}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{jac}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{n}{adagrad}\PY{p}{,} \PY{n}{callback}\PY{o}{=}\PY{n+nb}{print}\PY{p}{,}
+                                   \PY{n}{options}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final iterate: }\PY{l+s+si}{\PYZpc{}.6f}\PY{l+s+s1}{. Number of iterations: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{. Final loss: }\PY{l+s+si}{\PYZpc{}.8f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{opt\PYZus{}res}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{opt\PYZus{}res}\PY{o}{.}\PY{n}{nit}\PY{p}{,} \PY{n}{losses}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Expected output (Adagrad):}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} 1.0000002777777202}
+        \PY{c+c1}{\PYZsh{} 0.3675446666871427}
+        \PY{c+c1}{\PYZsh{} 0.13664342397366747}
+        \PY{c+c1}{\PYZsh{} 0.050879388377382734}
+        \PY{c+c1}{\PYZsh{} 0.018949088326907643}
+        \PY{c+c1}{\PYZsh{} 0.007057448115379032}
+        \PY{c+c1}{\PYZsh{} 0.002628505330734456}
+        \PY{c+c1}{\PYZsh{} 0.0009789720193835473}
+        \PY{c+c1}{\PYZsh{} 0.00036461264876190005}
+        \PY{c+c1}{\PYZsh{} Final iterate: 0.000365. Number of iterations: 9. Final loss: 0.00000013.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.0000002777777204
+0.3675446666871429
+0.13664342397366758
+0.050879388377382775
+0.018949088326907663
+0.0070574481153790405
+0.0026285053307344586
+0.0009789720193835482
+0.0003646126487619004
+Final iterate: 0.000365. Number of iterations: 9. Final loss: 0.00000013.
+
+    \end{Verbatim}
+
+    \subsection{\texorpdfstring{{Student-facing \texttt{Answer} class
+(provided)}}{Student-facing Answer class (provided)}}\label{student-facing-answer-class-provided}
+
+You have been provided a class called \texttt{Answer} which will be
+helpful for the remainder of the project. It can be found in the
+\texttt{answer.py} file. You are welcome to read and modify it, but this
+is not required. All information you need about this class is documented
+here, and examples of usage are given below. \#\#\# Documentation -
+\texttt{\_\_init\_\_(self,\ methods,\ func,\ grad)} - Instantiates the
+\texttt{Answer} class with the functions you have implemented.
+\texttt{methods} is a dictionary mapping algorithm names to the
+functions that implement them, and \texttt{func} and \texttt{grad} are
+the functions of the same name that you have implemented. -
+\texttt{set\_fn\_settings(self,\ fn\_name)} - Sets the instance
+variables needed for visualizing \texttt{fn\_name} with \texttt{plot2d}
+and \texttt{plot3d}. Needs to be called before calling these functions.
+- \texttt{set\_settings(self,\ fn\_name,\ method,\ x0,\ **kwargs)} -
+Sets the instance variables needed for visualizing \texttt{method}
+optimizing \texttt{fn\_name} starting at \texttt{x0} with
+\texttt{path2d}, \texttt{path3d}, \texttt{video2d}, and
+\texttt{video3d}. Any additional \texttt{kwargs} (likely \texttt{lr} and
+\texttt{num\_iters}) will be passed on to \texttt{method}. Needs to be
+called before calling these functions or \texttt{compare}. -
+\texttt{get\_settings(self)} - Returns the arguments passed into
+\texttt{set\_settings}: \texttt{fn\_name}, \texttt{method}, \texttt{x0},
+and \texttt{kwargs}. -
+\texttt{compare(self,\ method,\ start\_iter=0,\ **kwargs)} - Generates
+training loss graph comparing \texttt{method} with the previously set
+method on the previously set loss function and starting point, starting
+at iteration \texttt{start\_iter}. Additional \texttt{kwargs} (likely
+\texttt{lr} and \texttt{num\_iters}) will be passed on to
+\texttt{method}. - \texttt{get\_xs\_losses(self)} - Returns a tuple
+containing - {[}type: \texttt{np.ndarray} (1 + \texttt{n\_iters}, 2){]}
+All iterates (including the initial point). - {[}type:
+\texttt{np.ndarray} (1 + \texttt{n\_iters},){]} The loss at each
+iterate. - \texttt{get\_min\_errs(self)} - Returns a tuple containing -
+\texttt{float} representing the closest (in L2 norm) the optimization
+procedure got to the global minimizer. - \texttt{float} representing the
+closest the optimization procedure got to the global minimum function
+value. - \texttt{func\_val(self,\ x)} - Returns \texttt{float} value of
+the previously set loss function evaluated at \texttt{x}. Convenience
+tool for debugging. - \texttt{grad\_val(self,\ x)} - Returns
+\texttt{np.ndarray} (2,) gradient of the previously set loss function
+evaluated at \texttt{x}. Convenience tool for debugging. -
+\texttt{plot2d(self)} - Plots contours of the previously set loss
+function. - \texttt{plot3d(self)} - Plots the previously set loss
+function. - \texttt{path2d(self)} - Plots the sequence of iterates
+produced by the set method on the set loss function on a 2D contour. -
+\texttt{path3d(self)} - Plots the sequence of iterates produced by the
+set method on the set loss function on a 3D graph. \textbf{NOTE:} This
+one does not work very well. - \texttt{video2d(self,\ filename=None)} -
+Creates and saves an MP4 video of the path taken in \texttt{path2d} at
+\texttt{filename}. File name defaults to
+"\{function\}\_\{method\}\emph{2d.mp4" -
+\texttt{video3d(self,\ filename=None)} - Creates and saves an MP4 video
+of the path taken in \texttt{path3d} at \texttt{filename}. File name
+defaults to "\{function\}}\{method\}\_3d.mp4". \textbf{NOTE:} This works
+better than \texttt{path3d}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} instantiate the Answer class with the methods you have implemented! (You can implement and add more if you like!)}
+        \PY{n}{ans} \PY{o}{=} \PY{n}{Answer}\PY{p}{(}
+            \PY{p}{\PYZob{}}  \PY{c+c1}{\PYZsh{} a mapping of algorithm names to functions implementing them}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{gd}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{momentum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{momentum}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{nag}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adagrad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{adagrad}
+            \PY{p}{\PYZcb{}}\PY{p}{,}
+            \PY{n}{func}\PY{p}{,}
+            \PY{n}{grad}
+        \PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Playground and
+Exploration}\label{playground-and-exploration}
+
+You are free to use the functions described above to explore the
+behavior of the optimization algorithms you have implemented. Pick
+different starting points, learning rate schedules, and even tolerances
+to explore! Example usage of the \texttt{Answer} class is below.
+
+\subsubsection{Exploration}\label{exploration}
+
+For each of the functions, start at the given initial points (\(x_0\))
+and use any choice of optimization algorithm and associated
+hyperparameters to get within the specified distance of the global
+minimizer and minimum (\(\epsilon_x\), \(\epsilon_f\)). \emph{Hint: The
+\texttt{get\_min\_errs} function will be helpful}. There is a spot below
+for you to submit your results for each challenge.
+
+\begin{itemize}
+\tightlist
+\item
+  Booth function
+\item
+  \(x_0=[8, 9], \epsilon_x=10^{-7}, \epsilon_f=10^{-14}\)
+\item
+  Beale function
+\item
+  \(x_0=[3, 4], \epsilon_x=0.5, \epsilon_f=0.07\)
+\item
+  Rosenbrock function
+\item
+  \(x_0=[8, 9], \epsilon_x=10^{-7}, \epsilon_f=10^{-14}\)
+\item
+  Ackley function
+\item
+  \(x_0=[25, 20]\). This function is challenging to optimize. Tell us in
+  your write-up what approaches you tried and how close you got.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{lr\PYZus{}}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{t} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{1}
+             \PY{k}{elif} \PY{n}{t} \PY{o}{\PYZlt{}} \PY{l+m+mi}{20}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mf}{1e\PYZhy{}3}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mf}{1e\PYZhy{}5}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{set\PYZus{}settings}\PY{p}{(}\PY{n}{fn\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rosen2d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adagrad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{n}{lr\PYZus{}}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} How close the optimization got to the red star, and how far the min loss was from the global min.}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{ans}\PY{o}{.}\PY{n}{get\PYZus{}min\PYZus{}errs}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} The gradient at the end of the optimization. This can be helpful for tuning your learning rate schedule!}
+         \PY{n}{last\PYZus{}grad} \PY{o}{=} \PY{n}{ans}\PY{o}{.}\PY{n}{grad\PYZus{}val}\PY{p}{(}\PY{n}{ans}\PY{o}{.}\PY{n}{get\PYZus{}xs\PYZus{}losses}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{last\PYZus{}grad}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Some visuals}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{plot3d}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{path2d}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{get\PYZus{}xs\PYZus{}losses}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} ans.video3d()  \PYZsh{} This saves a video to the folder this notebook is in!}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(3.605551275463989, 1.3838997168564693)
+[0.5608264  0.41163231]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} (array([[3.        , 4.        ],
+                 [2.        , 5.        ],
+                 [2.13175275, 4.80388386],
+                 [2.16789087, 4.75305476],
+                 [2.17513187, 4.74261508],
+                 [2.17638294, 4.74037915],
+                 [2.17653143, 4.73964736],
+                 [2.17648195, 4.73918549],
+                 [2.17639707, 4.73877189],
+                 [2.17630587, 4.73836693],
+                 [2.17621354, 4.73796354],
+                 [2.17621345, 4.73796314],
+                 [2.17621336, 4.73796273],
+                 [2.17621326, 4.73796233],
+                 [2.17621317, 4.73796193],
+                 [2.17621308, 4.73796152],
+                 [2.17621299, 4.73796112],
+                 [2.17621289, 4.73796072],
+                 [2.1762128 , 4.73796031],
+                 [2.17621271, 4.73795991],
+                 [2.17621262, 4.73795951],
+                 [2.17621261, 4.7379595 ]]),
+          array([2.50400000e+03, 1.01000000e+02, 8.01561952e+00, 1.64809982e+00,
+                 1.39396843e+00, 1.38527293e+00, 1.38478236e+00, 1.38455575e+00,
+                 1.38433760e+00, 1.38411973e+00, 1.38390190e+00, 1.38390168e+00,
+                 1.38390146e+00, 1.38390124e+00, 1.38390103e+00, 1.38390081e+00,
+                 1.38390059e+00, 1.38390037e+00, 1.38390015e+00, 1.38389994e+00,
+                 1.38389972e+00, 1.38389972e+00]))
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{ans}\PY{o}{.}\PY{n}{compare}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{momentum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Method    adagrad] Final loss: 1.3839, Final x: [2.1762, 4.7380]
+[Method   momentum] Final loss: 84.4012, Final x: [2.1531, 3.7245]
+
+    \end{Verbatim}
+
+    \subsection{\texorpdfstring{{Submission:
+Challenge}}{Submission: Challenge}}\label{submission-challenge}
+
+{Place code in the below cells that demonstrates your results for each
+challenge. Each cell should end with \texttt{get\_min\_errs()}
+displaying the achieved error.}
+
+    \subsubsection{Booth function}\label{booth-function}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Replace parameters here}
+         \PY{n}{params} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{lr}\PY{o}{=} \PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{0.02}\PY{p}{,}
+             \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{2500}\PY{p}{,}
+             \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.8}
+         \PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ans.set\PYZus{}settings(fn\PYZus{}name=\PYZsq{}rosen2d\PYZsq{}, method=\PYZsq{}adagrad\PYZsq{}, x0=np.array([3, 4]), lr=lr\PYZus{}, num\PYZus{}iters=30, tol=1e\PYZhy{}8)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{set\PYZus{}settings}\PY{p}{(}\PY{n}{fn\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{booth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{,}\PY{o}{*}\PY{o}{*}\PY{n}{params}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{plot3d}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{path2d}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{compare}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{momentum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{2000}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ans.compare(\PYZsq{}nag\PYZsq{}, lr=lambda t: 0.01, num\PYZus{}iters=200)}
+         \PY{c+c1}{\PYZsh{}ans.compare(\PYZsq{}adagrad\PYZsq{}, lr=lambda t: 0.01, num\PYZus{}iters=200)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{get\PYZus{}min\PYZus{}errs}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Method         gd] Final loss: 0.0000, Final x: [1.0000, 3.0000]
+[Method   momentum] Final loss: 0.0000, Final x: [1.0000, 3.0000]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} (5.191963541863726e-07, 2.695648542004213e-13)
+\end{Verbatim}
+            
+    \subsubsection{Beale function}\label{beale-function}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Replace parameters here}
+        \PY{c+c1}{\PYZsh{}ans.set\PYZus{}settings(fn\PYZus{}name=\PYZsq{}beale\PYZsq{}, method=\PYZsq{}nag\PYZsq{}, x0=np.array([3, 4]), lr=1e\PYZhy{}4, num\PYZus{}iters=1e\PYZhy{}5, tol=0.5)}
+        \PY{n}{params} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+            \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{momentum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{lr}\PY{o}{=} \PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{,}
+            \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{100000}\PY{p}{,}
+            \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.85}
+        \PY{p}{)}
+        \PY{n}{ans}\PY{o}{.}\PY{n}{set\PYZus{}settings}\PY{p}{(}\PY{n}{fn\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beale}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{,}\PY{o}{*}\PY{o}{*}\PY{n}{params}\PY{p}{)}
+        \PY{n}{ans}\PY{o}{.}\PY{n}{plot3d}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ans}\PY{o}{.}\PY{n}{path2d}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ans}\PY{o}{.}\PY{n}{compare}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{100000}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}ans.compare(\PYZsq{}nag\PYZsq{}, start\PYZus{}iter=0, **params)}
+        \PY{c+c1}{\PYZsh{}ans.compare(\PYZsq{}gd\PYZsq{}, start\PYZus{}iter=0, **params)}
+        \PY{n}{ans}\PY{o}{.}\PY{n}{get\PYZus{}min\PYZus{}errs}\PY{p}{(}\PY{p}{)}
+        \PY{n}{params} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+            \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{lr}\PY{o}{=} \PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{,}
+            \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{100000}\PY{p}{,}
+            \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.85}
+        \PY{p}{)}
+        \PY{n}{ans}\PY{o}{.}\PY{n}{set\PYZus{}settings}\PY{p}{(}\PY{n}{fn\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{beale}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{,}\PY{o}{*}\PY{o}{*}\PY{n}{params}\PY{p}{)}
+        \PY{n}{ans}\PY{o}{.}\PY{n}{path2d}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Method   momentum] Final loss: 0.0011, Final x: [2.9223, 0.4799]
+[Method         gd] Final loss: 0.0001, Final x: [2.9793, 0.4948]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Rosenbrock function}\label{rosenbrock-function}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Replace parameters here}
+         \PY{k}{def} \PY{n+nf}{lr\PYZus{}1}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{t} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1000}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{1}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mf}{0.0002}
+         \PY{n}{params} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adagrad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{lr}\PY{o}{=}\PY{k}{lambda} \PY{n}{t}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{,}
+             \PY{c+c1}{\PYZsh{}lr=0.5,}
+             \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{500000000}
+         \PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{set\PYZus{}settings}\PY{p}{(}\PY{n}{fn\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rosen2d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}14}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{params}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{plot3d}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{path2d}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{ans}\PY{o}{.}\PY{n}{get\PYZus{}min\PYZus{}errs}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{params} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{lr}\PY{o}{=}\PY{k}{lambda} \PY{n}{t}\PY{p}{:}\PY{l+m+mf}{0.0002}\PY{p}{,}
+             \PY{c+c1}{\PYZsh{}lr=0.5,}
+             \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{500000}
+         \PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{set\PYZus{}settings}\PY{p}{(}\PY{n}{fn\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rosen2d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}10}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{params}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{path2d}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{get\PYZus{}min\PYZus{}errs}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+(6.580397824891067e-10, 8.653853518666686e-20)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} (1.3198736580623927e-06, 3.478566656773554e-13)
+\end{Verbatim}
+            
+    \subsubsection{Ackley function}\label{ackley-function}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Replace parameters here}
+         \PY{k}{def} \PY{n+nf}{lr\PYZus{}t}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{:}
+             \PY{n}{c1} \PY{o}{=} \PY{l+m+mi}{10000}
+             \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{c2} \PY{o}{=} \PY{l+m+mi}{15500}
+             \PY{n}{rate} \PY{o}{=} \PY{n}{c1}\PY{o}{/}\PY{p}{(}\PY{n}{t}\PY{o}{*}\PY{o}{*}\PY{n}{a}\PY{o}{+}\PY{n}{c2}\PY{p}{)}
+             \PY{k}{return} \PY{n}{rate}
+         \PY{n}{params} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{momentum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{c+c1}{\PYZsh{}lr=lambda t:0.425,}
+             \PY{n}{lr}\PY{o}{=}\PY{n}{lr\PYZus{}t}\PY{p}{,}
+             \PY{n}{num\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{1000000}\PY{p}{,}
+             \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.9}
+         \PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{set\PYZus{}settings}\PY{p}{(}\PY{n}{fn\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ackley2d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}5}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{params}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ans.set\PYZus{}settings(fn\PYZus{}name=\PYZsq{}ackley2d\PYZsq{},method=\PYZsq{}momentum\PYZsq{}, x0=np.array([25, 20]),tol=1e\PYZhy{}5, **params)}
+         \PY{c+c1}{\PYZsh{}ans.compare(\PYZsq{}adagrad\PYZsq{}, lr=lr\PYZus{}t, num\PYZus{}iters=100000)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{plot3d}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{path2d}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ans}\PY{o}{.}\PY{n}{get\PYZus{}min\PYZus{}errs}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Znj\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:25: RuntimeWarning: divide by zero encountered in true\_divide
+C:\textbackslash{}Users\textbackslash{}Znj\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:25: RuntimeWarning: invalid value encountered in multiply
+C:\textbackslash{}Users\textbackslash{}Znj\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:26: RuntimeWarning: divide by zero encountered in true\_divide
+C:\textbackslash{}Users\textbackslash{}Znj\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:26: RuntimeWarning: invalid value encountered in multiply
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} (2.1740479700816824e-07, 6.1491488523302e-07)
+\end{Verbatim}
+            
+    \subsection{\texorpdfstring{{Submission: Project
+Report}}{Submission: Project Report}}\label{submission-project-report}
+
+    {Create a report (which will probably be at least half a page)
+explaining the avenues you explored after the implementation phase of
+the project, the process you used to select the function values for each
+combination of functions and initial points, and what you found or
+learned. You are encouraged to include explanatory images or links to
+videos generated in the process, showcasing the process you describe or
+any interesting or unusual phenomena you observe over the course of your
+investigation!}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
